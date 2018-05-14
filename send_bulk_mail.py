@@ -10,23 +10,24 @@ from email import encoders
 def send_mass_email(frm,rcv,sub,txt,server):
 	rcvlist=rcv.split(" ")
 	l1=0
-	filename = raw_input('Enter filepath:')
-	attachment = open(filename, "rb")
 	msg = MIMEMultipart()
 	msg['From'] = frm
 	msg['Subject'] = sub    #"SUBJECT OF THE EMAIL"
-		
 	body = txt 		#"TEXT YOU WANT TO SEND"
+	ch=input("Would you like to attach a file(y/n):")
+	if(ch=='y' or ch=='Y'):
+		filename = raw_input('Enter filepath:')
+		attachment = open(filename, "rb")
+		part = MIMEBase('application', 'octet-stream')
+		part.set_payload((attachment).read())
+		encoders.encode_base64(part)
+		part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+		msg.attach(part)
 	
 	msg.attach(MIMEText(body, 'plain'))
-		
-	part = MIMEBase('application', 'octet-stream')
-	part.set_payload((attachment).read())
-	encoders.encode_base64(part)
-	part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+	
 	while(l1<len(rcvlist)):	
 		msg['To'] = rcvlist[l1]
-		msg.attach(part)
 		text = msg.as_string()
 		server.sendmail(frm,rcvlist[l1],text)
 		print "sended mail to:",rcvlist[l1]
