@@ -5,4 +5,5 @@ this python project allows you to send mass mail each individual separately whic
 You can download pip package with below command
 
 * pip install mass-email==0.2
+
 more info about this pip package you can see here: https://pypi.org/project/mass-email/0.2/
