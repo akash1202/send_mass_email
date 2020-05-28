@@ -1,7 +1,7 @@
 import smtplib
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
-from email.MIMEBase import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
 from email import encoders
 # https://myaccount.google.com/intro/security
 #fromaddr = "YOUR EMAIL"
@@ -16,7 +16,7 @@ def send_mass_email(frm,rcv,sub,txt,server):
 	body = txt 		#"TEXT YOU WANT TO SEND"
 	ch=input("Would you like to attach a file(y/n):")
 	if(ch=='y' or ch=='Y'):
-		filename = raw_input('Enter filepath:')
+		filename = input('Enter filepath:')
 		attachment = open(filename, "rb")
 		part = MIMEBase('application', 'octet-stream')
 		part.set_payload((attachment).read())
@@ -30,14 +30,14 @@ def send_mass_email(frm,rcv,sub,txt,server):
 		msg['To'] = rcvlist[l1]
 		text = msg.as_string()
 		server.sendmail(frm,rcvlist[l1],text)
-		print "sended mail to:",rcvlist[l1]
+		print ("sended mail to:",rcvlist[l1])
 		l1=l1+1
-print "--**--**-- Please Enter Below detail to send mass Email --**--**--\n\n"
-fromaddr=raw_input('Enter your Email Address:')
-password=raw_input('your Password:')
-toaddr = raw_input('Receiver Address(separated by space):')
-subject=raw_input('Enter Subject:')
-text=raw_input('Enter Body Text:')
+print ("--**--**-- Please Enter Below detail to send mass Email --**--**--\n\n")
+fromaddr=input('Enter your Email Address:')
+password=input('your Password:')
+toaddr = input('Receiver Address(separated by space):')
+subject=input('Enter Subject:')
+text=input('Enter Body Text:')
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
 server.login(fromaddr, password)
