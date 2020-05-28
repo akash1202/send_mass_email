@@ -3,7 +3,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
-# https://myaccount.google.com/intro/security
+# https://myaccount.google.com/lesssecureapps   link to allow less secure app to use gmail service
 #fromaddr = "YOUR EMAIL"
 #toaddr = "EMAIL ADDRESS YOU SEND TO"
 
